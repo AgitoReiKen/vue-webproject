@@ -1,0 +1,88 @@
+:root {
+  --c-red-hue: 0;
+  --c-yellow-hue: 40;
+  --c-green-hue: 120;
+  --c-blue-hue: 200;
+  --c-purple-hue: 240;
+  --c-hue: 240;
+  --c-sat: 10%;
+
+  --c-red-1: hsl(var(--c-red-hue), 85%, 80%);
+  --c-red-2: hsl(var(--c-red-hue), 80%, 70%);
+  --c-red-3: hsl(var(--c-red-hue), 25%, 35%);
+
+  --c-yellow-1: hsl(var(--c-yellow-hue), 85%, 75%);
+  --c-yellow-2: hsl(var(--c-yellow-hue), 80%, 55%);
+  --c-yellow-3: hsl(var(--c-yellow-hue), 25%, 35%);
+
+  --c-green-1: hsl(var(--c-green-hue), 80%, 85%);
+  --c-green-2: hsl(var(--c-green-hue), 50%, 60%);
+  --c-green-3: hsl(var(--c-green-hue), 25%, 35%);
+
+  --c-blue-1: hsl(var(--c-blue-hue), 75%, 80%);
+  --c-blue-2: hsl(var(--c-blue-hue), 75%, 65%);
+  --c-blue-3: hsl(var(--c-blue-hue), 25%, 35%);
+
+  --c-purple-1: hsl(var(--c-purple-hue), 85%, 80%);
+  --c-purple-2: hsl(var(--c-purple-hue), 85%, 70%);
+  --c-purple-3: hsl(var(--c-purple-hue), 25%, 35%);
+
+  --c-light-1: hsl(var(--c-hue), var(--c-sat), 95%);
+  --c-light-1-hsl: var(--c-hue), var(--c-sat), 95%;
+  --c-light-2: hsl(var(--c-hue), var(--c-sat), 60%);
+
+  --c-dark-1: hsl(var(--c-hue), var(--c-sat), 10%);
+  --c-dark-2: hsl(var(--c-hue), var(--c-sat), 15%);
+  --c-dark-3: hsl(var(--c-hue), var(--c-sat), 20%);
+  --c-dark-4: hsl(var(--c-hue), var(--c-sat), 30%);
+}
+
+$GColorMap: 'red', 'yellow', 'green', 'blue', 'purple';
+$GColorLevels: 3;
+$GDarkColor: 'dark';
+$GDarkColorLevels: 4;
+$GLightColor: 'light';
+$GLightColorLevels: 2;
+
+@function getColor($color, $colorLevel) {
+  @return var(--c-#{$color}-#{$colorLevel});
+}
+
+@mixin makeColored($property, $func, $preClass, $postClass) {
+  @each $color in $GColorMap {
+    @for $colorLevel from 1 through $GColorLevels {
+      #{$preClass}-#{$color}-#{$colorLevel}#{$postClass} {
+        #{$property}: call(get-function($func), $color, $colorLevel);
+      }
+    }
+  }
+  $color: $GDarkColor;
+  @for $colorLevel from 1 through $GDarkColorLevels {
+    #{$preClass}-#{$color}-#{$colorLevel}#{$postClass} {
+      #{$property}: call(get-function($func), $color, $colorLevel);
+    }
+  }
+  $color: $GLightColor;
+  @for $colorLevel from 1 through $GLightColorLevels {
+    #{$preClass}-#{$color}-#{$colorLevel}#{$postClass} {
+      #{$property}: call(get-function($func), $color, $colorLevel);
+    }
+  }
+}
+
+@function getOutlineColorImportant($color, $colorLevel) {
+  @return var(--c-#{$color}-#{$colorLevel}) !important
+}
+
+@include makeColored(color, getColor, '.c', '');
+@include makeColored(color, getColor, '.c', '-hover:hover');
+@include makeColored(color, getColor, '.c', '-active:active');
+@include makeColored(color, getColor, '.c', '-active:focus');
+@include makeColored(background, getColor, '.bg', '');
+@include makeColored(background, getColor, '.bg', '-hover:hover');
+@include makeColored(background, getColor, '.bg', '-active:active');
+@include makeColored(background, getColor, '.bg', '-active:focus');
+@include makeColored(outline-color, getOutlineColorImportant, '.outline', '');
+@include makeColored(outline-color, getOutlineColorImportant, '.outline', '-hover:hover');
+@include makeColored(outline-color, getOutlineColorImportant, '.outline', '-active:active');
+@include makeColored(outline-color, getOutlineColorImportant, '.outline', '-active:focus');

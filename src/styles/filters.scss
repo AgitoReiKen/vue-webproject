@@ -1,0 +1,23 @@
+:root {
+  --soft-small-shadow: drop-shadow(0 .125rem .25rem rgba(0, 0, 0, 25%));
+  --soft-normal-shadow: drop-shadow(0 .125rem .5rem rgba(0, 0, 0, 25%));
+  --soft-large-shadow: drop-shadow(0 .125rem 1rem rgba(0, 0, 0, 25%));
+  
+  --hard-small-shadow: drop-shadow(0 .125rem .25rem rgba(0, 0, 0, 50%));
+  --hard-normal-shadow: drop-shadow(0 .125rem .5rem rgba(0, 0, 0, 50%));
+  --hard-large-shadow: drop-shadow(0 .125rem 1rem rgba(0, 0, 0, 50%));
+
+  --glow-soft-red: drop-shadow(0 0 .5rem var(--c-red-2));
+  --glow-soft-yellow: drop-shadow(0 0 .5rem var(--c-yellow-2));
+  --glow-soft-green: drop-shadow(0 0 .5rem var(--c-green-2));
+  --glow-soft-blue: drop-shadow(0 0 .5rem var(--c-blue-2));
+  --glow-soft-purple: drop-shadow(0 0 .5rem var(--c-purple-2));
+
+  --glow-hard-red: drop-shadow(0 0 .25rem var(--c-red-2));
+  --glow-hard-yellow: drop-shadow(0 0 .25rem var(--c-yellow-2));
+  --glow-hard-green: drop-shadow(0 0 .25rem var(--c-green-2));
+  --glow-hard-blue: drop-shadow(0 0 .25rem var(--c-blue-2));
+  --glow-hard-purple: drop-shadow(0 0 .25rem var(--c-purple-2));
+}
+
+

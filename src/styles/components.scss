@@ -1,0 +1,358 @@
+@use 'sass:list';
+@import 'transitions.scss';
+@import 'filters.scss';
+@import 'colors.scss';
+
+@mixin outline-s($color) {
+  outline: 1px solid #{$color};
+}
+
+@mixin outline-m($color) {
+  outline: 2px solid #{$color};
+}
+
+@mixin fit-content {
+  width: fit-content;
+  height: fit-content;
+}
+
+.widget {
+  @include fit-content;
+  transition: background var(--transition-default-time) var(--transition-default-time),
+  color var(--transition-default-time) var(--transition-default-time),
+  filter var(--transition-default-time) var(--transition-default-time);
+  filter: var(--soft-small-shadow);
+  padding: var(--gap-m);
+  display: flex;
+}
+
+
+@mixin coloredButtons() {
+  @each $color in $GColorMap {
+    button.bg-#{$color}-2 {
+      background: var(--c-#{$color}-2);
+    }
+    button:not([disabled]).bg-#{$color}-3:hover {
+      background: var(--c-#{$color}-2);
+    }
+    button:not([disabled]).primary.bg-#{$color}-2.glow:hover,
+    button:not([disabled]).primary.bg-#{$color}-3.glow:hover {
+      filter: var(--glow-soft-#{$color});
+    }
+    button:not([disabled]).secondary.bg-#{$color}-2.glow:hover,
+    button:not([disabled]).secondary.bg-#{$color}-3.glow:hover {
+      filter: var(--glow-hard-#{$color});
+    }
+  }
+}
+
+@mixin button() {
+  button {
+    @include fit-content;
+    @include transition(background color filter, var(--transition-fast-time), var(--transition-ease-out-cubic));
+    display: flex;
+    flex-direction: row;
+    gap: var(--gap-m);
+    border: none;
+    box-sizing: border-box;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--c-light-1);
+    cursor: pointer;
+    font-family: inherit;
+    position: relative;
+    overflow: hidden;
+    align-items: center;
+  }
+
+  button.transparent {
+    background: none;
+    color: var(--c-light-2);
+  }
+
+  button.transparent:hover {
+    background: hsl(var(--c-light-1-hsl), 5%);
+    color: var(--c-light-1);
+  }
+
+  button[disabled] {
+    /* filter: var(--hard-shadow); */
+    color: var(--c-light-2) !important;
+  }
+
+  button:not([disabled]).bg-dark-3:hover {
+    background: var(--c-dark-4);
+  }
+
+  button.primary {
+    padding: var(--gap-l) var(--gap-xl);
+  }
+
+  button.secondary {
+    padding: var(--gap-l) var(--gap-xl);
+  }
+
+  button.tertiary {
+    padding: var(--gap-m) var(--gap-l);
+  }
+
+  button.shiny::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: block;
+    background: linear-gradient(90deg, transparent 0%, #ffffff70 50%, transparent 100%);
+
+    z-index: 1;
+    transform: translateX(-120%) skew(-20deg);
+    animation: 4s ease-in-out 0s infinite running slide;
+    @keyframes slide {
+      0% {
+        transform: translateX(-120%) skew(-20deg);
+      }
+      80% {
+        transform: translateX(-120%) skew(-20deg);
+      }
+      100% {
+        transform: translateX(120%) skew(-20deg);
+      }
+    }
+  }
+
+}
+
+@include button();
+@include coloredButtons();
+
+@mixin input() {
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+  input[type=checkbox] {
+    border: none;
+  }
+  input {
+    @include outline-s(var(--c-dark-3));
+    @include transition(background color outline, var(--transition-fast-time), var(--transition-ease-out-cubic));
+    border: none;
+    padding: var(--gap-m);
+    color: var(--c-light-1);
+    font-size: 1rem;
+    background: var(--c-dark-3);
+
+  }
+
+  input:hover {
+    @include outline-s(var(--c-dark-4));
+  }
+
+  input:active,
+  input:focus {
+    @include outline-s(var(--c-dark-4));
+  }
+
+  div.input {
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-s);
+  }
+
+  input[type="checkbox"] {
+
+    /* Add if not using autoprefixer */
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+    /* For iOS < 15 to remove gradient background */
+    background: var(--c-dark-3);
+    /* Not removed via appearance */
+    margin: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+    grid-row-start: 1;
+  }
+  input[type="checkbox"]:hover {
+    @include outline-s(var(--c-dark-4));
+  }
+  input[type="checkbox"]:checked {
+    @include outline-s(var(--c-green-2));
+  }
+  input[type="checkbox"]::before {
+    @include transition(background color outline, var(--transition-fast-time), var(--transition-ease-out-cubic));
+    content: '';
+    display: block;
+    position: relative;
+    width: 0.75rem;
+    height: 0.75rem;
+    left: -30%;
+    top: -30%;
+    background: transparent;
+  }
+  input[type="checkbox"]:checked::before {
+    content: '';
+    display: block;
+    position: relative;
+    width: 0.75rem;
+    height: 0.75rem;
+    left: -30%;
+    top: -30%;
+    background: var(--c-green-2);
+  }
+  div.checkbox {
+    display: grid;
+    grid-template-columns: 1fr auto;
+  }
+}
+
+@include input();
+
+@mixin icon() {
+  .icon {
+    width: 2rem;
+    height: 2rem;
+  }
+  .icon.size-xss {
+    width: .75rem;
+    height: .75rem;
+  }
+  .icon.size-xs {
+    width: 1rem;
+    height: 1rem;
+  }
+  .icon.size-s {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .icon.size-m {
+    width: 2rem;
+    height: 2rem;
+  }
+  .icon.size-l {
+    width: 3rem;
+    height: 3rem;
+  }
+  .icon.size-xl {
+    width: 4rem;
+    height: 4rem;
+  }
+  .icon.size-xxl {
+    width: 5rem;
+    height: 5rem;
+  }
+}
+
+@include icon();
+
+@mixin a() {
+  a {
+    @include transition(color background filter, var(--transition-fast-time),
+            var(--transition-ease-out-cubic));
+    padding: var(--gap-xs) var(--gap-s);
+  }
+
+  a {
+    text-decoration: none;
+    color: var(--c-purple-2);
+  }
+
+  a:hover {
+    color: var(--c-purple-1);
+  }
+}
+
+@include a();
+
+@mixin outline() {
+  .outline-s {
+    @include outline-s(currentColor);
+  }
+
+  .outline-m {
+    @include outline-m(currentColor);
+  }
+
+  .outline-s-hover:hover,
+  .outline-s-hover:active,
+  .outline-s-hover:focus {
+    @include outline-m(currentColor);
+  }
+
+  .outline-m-hover:hover,
+  .outline-m-hover:active,
+  .outline-m-hover:focus {
+    @include outline-m(currentColor);
+  }
+}
+
+@include outline();
+
+@mixin tooltip() {
+  div.tooltip {
+    position: relative;
+    display: inline-block;
+  }
+  div.tooltip.size-xs {
+    --tooltip-width: calc(min(16rem, 90vw));
+  }
+  div.tooltip.size-s {
+    --tooltip-width: calc(min(24rem, 90vw));
+  }
+  div.tooltip.size-m {
+    --tooltip-width: calc(min(32rem, 90vw));
+  }
+  div.tooltip.size-l {
+    --tooltip-width: calc(min(48rem, 90vw));
+  }
+  div.tooltip.size-xl {
+    --tooltip-width: calc(min(64rem, 90vw));
+  }
+  div.tooltip.size-xxl {
+    --tooltip-width: calc(min(96rem, 90vw));
+  }
+  div.tooltip span.tooltip-content {
+    visibility: hidden;
+    opacity: 0;
+    width: var(--tooltip-width);
+    max-width: 100vw;
+    bottom: 100%;
+    left: calc((var(--tooltip-width) * -0.5) + 50%);
+
+    color: var(--c-light-1);
+    text-align: center;
+    position: absolute;
+    z-index: 1;
+    transition: opacity var(--transition-default-time) ease-in-out var(--transition-slow-time);
+    background: var(--c-dark-4);
+    padding: 0.5rem;
+    filter: var(--soft-normal-shadow) !important;
+  }
+
+  div.tooltip span.tooltip-content::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    border-width: 0.5rem;
+    border-style: solid;
+    border-color: var(--c-dark-4) transparent transparent transparent;
+  }
+
+  div.tooltip:hover span.tooltip-content {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+@include tooltip();

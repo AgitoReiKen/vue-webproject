@@ -1,0 +1,115 @@
+/* color palette from <https://github.com/vuejs/theme> */
+:root {
+  --gap-xs: 0.125rem;
+  --gap-s: .25rem;
+  --gap-m: .5rem;
+  --gap-l: 1rem;
+  --gap-xl: 2rem;
+  --gap-xxl: 4rem;
+}
+
+@mixin gap() {
+  .gap-xs {
+    gap: var(--gap-xs);
+  }
+
+  .gap-s {
+    gap: var(--gap-s);
+  }
+
+  .gap-m {
+    gap: var(--gap-m);
+  }
+
+  .gap-l {
+    gap: var(--gap-l)
+  }
+
+  .gap-xl {
+    gap: var(--gap-xl)
+  }
+
+  .gap-xxl {
+    gap: var(--gap-xxl)
+  }
+}
+
+@mixin padding() {
+  .padding-xs {
+    padding: var(--gap-xs);
+  }
+
+  .padding-s {
+    padding: var(--gap-s);
+  }
+
+  .padding-m {
+    padding: var(--gap-m);
+  }
+
+  .padding-l {
+    padding: var(--gap-l)
+  }
+
+  .padding-xl {
+    padding: var(--gap-xl)
+  }
+
+  .padding-xxl {
+    padding: var(--gap-xxl)
+  }
+}
+
+@include gap();
+@include padding();
+.row {
+  display: flex !important;
+  flex-direction: row !important;
+}
+
+.column {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.grid {
+  display: grid !important;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--c-light-1);
+  background: var(--c-dark-1);
+  transition: color 0.5s,
+  background-color 0.5s;
+  font-family: Poppins, Roboto, sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img.page-background {
+  background: none;
+  width: 100%;
+  height: 100%;
+  mix-blend-mode: hue;
+}
+
+div.page-background {
+  z-index: -10;
+  position: fixed;
+  opacity: 0.1;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}

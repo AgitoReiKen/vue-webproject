@@ -1,0 +1,30 @@
+// Usage:   @include transition(width, height 0.3s ease-in-out);
+// Output:  -webkit-transition(width 0.2s, height 0.3s ease-in-out);
+//          transition(width 0.2s, height 0.3s ease-in-out);
+// Pass in any number of transitions
+// https://gist.github.com/tobiasahlin/7a421fb9306a4f518aab
+:root {
+  --transition-default-func: ease-in-out;
+  --transition-ease-out-cubic: cubic-bezier(.22, .61, .36, 1);
+  --transition-ease-in-cubic: cubic-bezier(.55, .06, .68, .19);
+
+  --transition-default-time: .33s;
+  --transition-fast-time: .2s;
+  --transition-slow-time: .66s;
+}
+
+@mixin transition($properties, $duration, $func) {
+  $unfoldedTransitions: ();
+  @each $property in $properties {
+    $unfoldedTransitions: append($unfoldedTransitions, ($property $duration $func), comma);
+  }
+
+  -webkit-transition: $unfoldedTransitions;
+  transition: $unfoldedTransitions;
+}
+
+@mixin defaultFastTransition() {
+  transition: background var(--transition-fast-time) var(--transition-ease-out-cubic),
+  color var(--transition-fast-time) var(--transition-ease-out-cubic),
+  filter var(--transition-fast-time) var(--transition-ease-out-cubic);
+}
