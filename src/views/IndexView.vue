@@ -32,17 +32,7 @@ export default {
     async login() {
       if (this.isButtonLoading) return
       this.isButtonLoading = true
-      fetch('http://localhost:8000/auth/steam')
-        .then((res) => {
-          if (res.redirected) {
-            window.location.href = res.url
-          }
-          this.isButtonLoading = false
-        })
-        .catch((error) => {
-          console.log(error)
-          this.isButtonLoading = false
-        })
+      window.location.href = 'http://localhost:8000/auth/steam'
     }
   }
 }
