@@ -123,21 +123,21 @@
         <XButton
           :is-loading="IsLoadingButton"
           @click="setLoading"
-          bclass="primary transparent text-m shiny text-uppercase"
+          class="primary transparent text-m shiny text-uppercase"
         >
           <template v-slot:append> Loading on click</template>
         </XButton>
         <XButton
           :is-loading="IsLoadingButton"
           @click="setLoading"
-          bclass="primary bg-dark-3 bg-dark-2-hover text-s text-uppercase"
+          class="primary bg-dark-3 bg-dark-2-hover text-s text-uppercase"
         >
           <template v-slot:append> Loading on click</template>
         </XButton>
         <XButton
           :is-loading="IsLoadingButton"
           @click="setLoading"
-          bclass="primary bg-red-3 bg-red-2-hover glow text-s text-uppercase"
+          class="primary bg-red-3 bg-red-2-hover glow text-s text-uppercase"
         >
           <template v-slot:append> Loading on click</template>
         </XButton>
