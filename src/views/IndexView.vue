@@ -32,7 +32,8 @@ export default {
     async login() {
       if (this.isButtonLoading) return
       this.isButtonLoading = true
-      window.location.href = 'http://localhost:8000/auth/steam'
+      window.location.href = 'https://localhost:8000/auth/steam'
+      this.isButtonLoading = false
     }
   }
 }
