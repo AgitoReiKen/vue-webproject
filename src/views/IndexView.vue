@@ -5,7 +5,7 @@
   >
     <XButton
       :is-loading="isButtonLoading"
-      bclass="primary transparent text-m shiny text-uppercase"
+      class="primary transparent text-m shiny text-uppercase"
       @click="login"
     >
       <template v-slot:prepend>
