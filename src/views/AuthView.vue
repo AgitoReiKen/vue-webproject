@@ -19,6 +19,8 @@ export default {
     const router = useRouter()
     const token = route.query.token
     const auth = useAuthStore()
+    const message = ref('')
+
     if (!auth.setToken(token)) {
       auth.removeToken()
       message.value = 'Authorization failed. Redirecting to login...'
@@ -27,7 +29,6 @@ export default {
       }, 3000)
       return
     }
-    const message = ref('')
     if (auth.isExpired()) {
       auth.removeToken()
       message.value = 'Authorization is expired. Check if your time is set correctly.'
