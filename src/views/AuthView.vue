@@ -19,7 +19,7 @@ export default {
     const router = useRouter()
     const token = route.query.token
     const auth = useAuthStore()
-    const message = ref('')
+    const message = ref('...')
 
     if (!auth.setToken(token)) {
       auth.removeToken()
@@ -27,16 +27,14 @@ export default {
       setTimeout(() => {
         router.push('/')
       }, 3000)
-      return
-    }
-    if (auth.isExpired()) {
+    } else if (auth.isExpired()) {
       auth.removeToken()
       message.value = 'Authorization is expired. Check if your time is set correctly.'
-      return
+    } else {
+      message.value = 'Successfully authorized. Redirecting to app...'
+      router.push('/profile')
     }
 
-    message.value = 'Successfully authorized. Redirecting to app...'
-    router.push('/profile')
     return {
       message
     }
