@@ -20,6 +20,7 @@
 import IconDiscord from '@/components/icons/IconDiscord.vue'
 import XButton from '@/components/XButton.vue'
 import router from '@/router'
+import { useAuthStore } from '@/stores/auth'
 
 export default {
   components: { XButton, IconDiscord },
@@ -32,8 +33,13 @@ export default {
     async login() {
       if (this.isButtonLoading) return
       this.isButtonLoading = true
-      window.location.href = 'https://localhost:8000/auth/steam'
-      this.isButtonLoading = false
+      const auth = useAuthStore()
+      if (auth.validate()) {
+        this.$router.push('/profile')
+      }
+      setTimeout(() => {
+        this.isButtonLoading = false
+      }, 3000)
     }
   }
 }
