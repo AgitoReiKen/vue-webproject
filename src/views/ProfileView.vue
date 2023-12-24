@@ -74,6 +74,7 @@ export default {
   name: 'ProfileView',
   setup() {
     const auth = useAuthStore()
+    auth.validate()
     return {
       auth: auth.data
     }
